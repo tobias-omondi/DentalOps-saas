@@ -11,7 +11,6 @@ class Appointment (models.Model):
   Appointment_time = models.TimeField()
   reason_for_visit = models.TextField()
   location = models.CharField()
-  status = models.CharField(max_length=50)
   created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
   updated_at = models.DateTimeField(auto_created=True, auto_now=True)
 
