@@ -12,8 +12,8 @@ class Treatment_Plan(models.Model):
   start_date = models.DateField()
   end_date = models.DateField()
   status = models.CharField(max_length=50)
-  created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
-  upadated_at = models.DateTimeField(auto_created=True, auto_now=True)
+  created_at = models.DateTimeField( auto_now_add=True)
+  upadated_at = models.DateTimeField(auto_now=True)
 
   def __str__(self):
     return f"Treatment plan for {self.patient.Full_name} at {self.clinic.name}"

@@ -10,9 +10,8 @@ class Subscription(models.Model):
   start_date = models.DateField()
   end_date = models.DateField()
   is_active = models.BooleanField(default=True)
-  created_at = models.DateTimeField(auto_created=True, auto_now_add=True)
-  updated_at = models.DateTimeField(auto_created=True,
-                                    auto_now=True)
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
   
   def __str__(self):
     return super().__str__()
