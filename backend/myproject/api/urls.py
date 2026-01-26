@@ -15,6 +15,6 @@ router.register(r'clinic-admins', ClinicAdminViewSet, basename='clinic-admin')
 router.register(r'subscriptions', SubscriptionViewSet)
 
 
-urlPatterns = [
+urlpatterns = [
   path('', include(router.urls)),
 ]

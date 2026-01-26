@@ -1,6 +1,12 @@
 # serialize the models to json (rules and validations)
 from rest_framework import serializers
-from .models import Clinic , Patient , Appointment, Treatment_Plan,  Communication, Clinic_Admin, Subscription
+from models.clinic import Clinic
+from models.patient import Patient
+from models.appointment import Appointment
+from models.treatment import Treatment_Plan
+from models.communication import Communication
+from models.clinic_admin import Clinic_Admin
+from models.subscription import Subscription
 
 
 # --CLINIC SERIALIZER--
