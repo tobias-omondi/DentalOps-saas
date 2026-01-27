@@ -4,13 +4,13 @@ from .clinic import Clinic
 
 # Patient models representation of a dental patient
 class Patient(models.Model):
-  Full_name = models.CharField(max_length=255)
+  full_name = models.CharField(max_length=255)
   date_of_birth = models.DateField()
   email = models.EmailField()
   phone_number = models.CharField(max_length=20)
   national_id = models.CharField(max_length=50, blank=True, null=True)
   address = models.CharField(max_length=255, blank=True, null=True)
-  clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE)
+  clinic = models.ForeignKey(Clinic, on_delete=models.CASCADE, related_name='patients')
   next_of_kin_name = models.CharField(max_length=255, blank=True, null=True)
   # medical history fields
   medical_history = models.TextField( default='', help_text="Patient's medical history and conditions")

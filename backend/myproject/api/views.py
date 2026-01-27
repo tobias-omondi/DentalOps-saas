@@ -19,8 +19,31 @@ class ClinicViewSet(viewsets.ModelViewSet):
 
 #  --PATIENT VIEW SET--
 class PatientViewSet (viewsets.ModelViewSet):
-  queryset = Patient.objects.all().order_by('Full_name') #show all patients ordered by name
+  queryset = Patient.objects.all().order_by('full_name') #show all patients ordered by name
   serializer_class = PatientDataSerializer
+
+  # isolate patients by clinic
+  def get_queryset(self):
+    clinic_id = self.request.query_params.get('clinic_id', None)
+    user = self.request.user
+    
+    # Allow superusers to see all patients (for development/testing)
+    if user.is_superuser:
+      if clinic_id is not None:
+        return self.queryset.filter(clinic_id=clinic_id)
+      return self.queryset
+    
+    # Get clinics the user is authorized for
+    user_clinics = Clinic_Admin.objects.filter(admin_user=user).values_list('clinic_id', flat=True)
+    
+    if clinic_id is not None:
+      # Verify user has access to this clinic
+      if int(clinic_id) not in user_clinics:
+        return self.queryset.none()  # Return empty queryset
+      return self.queryset.filter(clinic_id=clinic_id)
+    
+    # If no clinic_id specified, show patients only from clinics user manages
+    return self.queryset.filter(clinic_id__in=user_clinics)
 
 # -- APPOINTMENT VIEW SET --
 class AppointmentViewSet (viewsets.ModelViewSet):
