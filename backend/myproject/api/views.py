@@ -12,12 +12,26 @@ from models.communication import Communication
 from models.clinic_admin import Clinic_Admin
 from models.subscription import Subscription
 
+# import authentication and permissions
+from rest_framework.permissions import IsAuthenticated
+
+
 # --CLINIC VIEW SET
 class ClinicViewSet(viewsets.ModelViewSet):
   queryset = Clinic.objects.all().order_by('name_of_clinic')
   serializer_class = ClinicalDataSerializer
 
-#  --PATIENT VIEW SET--
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
+
+  def get_queryset(self):
+    user = self.request.user
+    return self.queryset.filter(owner=user).order_by('name_of_clinic')
+  
+
+
+
+#  == PATIENT VIEW SET ==
 class PatientViewSet (viewsets.ModelViewSet):
   queryset = Patient.objects.all().order_by('full_name') #show all patients ordered by name
   serializer_class = PatientDataSerializer
@@ -45,10 +59,14 @@ class PatientViewSet (viewsets.ModelViewSet):
     # If no clinic_id specified, show patients only from clinics user manages
     return self.queryset.filter(clinic_id__in=user_clinics)
 
+
+
 # -- APPOINTMENT VIEW SET --
 class AppointmentViewSet (viewsets.ModelViewSet):
   queryset = Appointment.objects.all()
   serializer_class = AppointmentDataSerializer
+
+
 
 # ==TREATMENT VIEW SET==
 class TreatmentViewSet (viewsets.ModelViewSet):
