@@ -13,7 +13,7 @@ DentalOps is a SaaS product used by dentists to track patient data, such as medi
 ### virtual eniviroment
     python3 -m venv env
 ### Activate
-    source env/bin/activate
+    source venv/bin/activate
 
     pip install django djangorestframework
     django-admin startproject myproject
