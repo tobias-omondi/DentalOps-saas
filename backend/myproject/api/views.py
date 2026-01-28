@@ -36,6 +36,9 @@ class PatientViewSet (viewsets.ModelViewSet):
   queryset = Patient.objects.all().order_by('full_name') #show all patients ordered by name
   serializer_class = PatientDataSerializer
 
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
+
   # isolate patients by clinic
   def get_queryset(self):
     clinic_id = self.request.query_params.get('clinic_id', None)
@@ -66,6 +69,9 @@ class AppointmentViewSet (viewsets.ModelViewSet):
   queryset = Appointment.objects.all()
   serializer_class = AppointmentDataSerializer
 
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
+
 
 
 # ==TREATMENT VIEW SET==
@@ -73,19 +79,31 @@ class TreatmentViewSet (viewsets.ModelViewSet):
   queryset = Treatment_Plan.objects.all()
   serializer_class =TreatmentDataSerializer
 
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
+
 # == COMMUNICATION VIEW SET==
 class CommunicationViewSet (viewsets.ModelViewSet):
   queryset = Communication.objects.all()
   serializer_class = CommunicationDataSerializer
+
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
 
 # == CLINIC ADMIN VIEW SET ==
 class ClinicAdminViewSet (viewsets.ModelViewSet):
   queryset = Clinic_Admin.objects.all()
   serializer_class = ClinicalDataSerializer
 
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
+
 # == subscription view set ==
 class SubscriptionViewSet (viewsets.ModelViewSet):
   queryset = Subscription.objects.all()
   serializer_class = SubscriptionDataSerializer
+
+  # ++ add authentication and permission classes
+  permission_classes = [IsAuthenticated]
   
 # ==CREATE OTHER VIEWS IF NEEDED==
