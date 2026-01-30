@@ -5,7 +5,7 @@ import { RouterProvider } from "react-router-dom"
 // IMPORTING PAGES AND COMPONETS
 import Overview from "./components/Pages/Overview"
 import Dashboard from "./components/MainDashboard/Dashboard"
-import LogIn from "./components/Pages/LogIn"
+import LogInForm from "./components/Pages/LogInForm"
 import LogOut from "./components/Pages/LogOut"
 import ClinicPage from "./components/Pages/ClinicPage"
 import PatientPage from "./components/Pages/PatientPage"
@@ -22,7 +22,7 @@ function App() {
       children :[
         {index: true, Component: Overview},
         {path: "overview", Component: Overview},
-        {path: "login", Component: LogIn},
+        {path: "login", Component: LogInForm},
         {path: "clinic/:clinicid", Component: ClinicPage},
         {path: "patient/:patientid", Component: PatientPage},
         {path: "dashboard", Component: DashboardLayout, children: [
